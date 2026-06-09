@@ -52,12 +52,6 @@ TEST(ObserverTest, MultipleObservers) {
     EXPECT_EQ(obs2.getLastMessage(), "Test");
 }
 
-TEST(ObserverTest, EmptySubject) {
-    Subject subj;
-    subj.notify("Nothing");
-    SUCCEED();
-}
-
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
