@@ -1,4 +1,4 @@
-name: CI
+name: GTests
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     branches: [ master, main ]
 
 jobs:
-  build:
+  gtest_build:
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-22.04]
@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install GTest
+    - name: Install GoogleTest framework
       run: |
         sudo apt update
         sudo apt install -y libgtest-dev cmake build-essential
@@ -28,17 +28,17 @@ jobs:
         sudo make
         sudo cp lib/*.a /usr/lib
     
-    - name: Configure CMake with tests
+    - name: Configure CMake with GTest tests
       run: cmake -H. -B_build -DBUILD_TESTS=ON
     
-    - name: Build
+    - name: Build with GTest
       run: cmake --build _build
     
-    - name: Run GTest tests
+    - name: Run GoogleTest tests
       run: ./_build/tests
 
   release:
-    needs: build
+    needs: gtest_build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     
