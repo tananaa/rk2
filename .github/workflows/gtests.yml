@@ -7,7 +7,7 @@ on:
       - 'v*'
 
 permissions:
-  contents: write    # <---- ГЛАВНАЯ КОМАНДА, которая все исправила
+  contents: write
 
 jobs:
   gtest_build:
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
-      contents: write    # <---- И ЗДЕСЬ ТОЖЕ
+      contents: write
     steps:
     - uses: actions/checkout@v4
     - name: Create Release
