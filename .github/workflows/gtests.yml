@@ -44,11 +44,11 @@ jobs:
     needs: gtest_build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
-    permissions:
-      contents: write
     
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     
     - name: Install dependencies
       run: sudo apt install -y cmake build-essential
@@ -69,5 +69,6 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: _build/*.deb
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
