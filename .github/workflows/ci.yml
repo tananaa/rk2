@@ -2,11 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ master, main ]
     tags:
       - 'v*'
   pull_request:
-    branches: [ main, master ]
+    branches: [ master, main ]
 
 jobs:
   build:
@@ -22,7 +22,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y libgtest-dev cmake build-essential
+        sudo apt install -y cmake build-essential
+        sudo apt install -y libgtest-dev
         cd /usr/src/gtest
         sudo cmake .
         sudo make
