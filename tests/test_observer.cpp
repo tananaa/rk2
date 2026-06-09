@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include <vector>
-#include <iostream>
+#include <string>
 
-// Простой Observer паттерн для теста
 class Observer {
 public:
     virtual void update(const std::string& message) = 0;
+    virtual ~Observer() = default;
 };
 
 class Subject {
@@ -50,6 +50,12 @@ TEST(ObserverTest, MultipleObservers) {
     subj.notify("Test");
     EXPECT_EQ(obs1.getLastMessage(), "Test");
     EXPECT_EQ(obs2.getLastMessage(), "Test");
+}
+
+TEST(ObserverTest, EmptySubject) {
+    Subject subj;
+    subj.notify("Nothing");
+    SUCCEED();
 }
 
 int main(int argc, char** argv) {
